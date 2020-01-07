@@ -1,11 +1,10 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
-import HeaderWithLogOut from './HeaderWithLogOut';
 
 const FarmerHomepage = () => {
 	return (
 		<div>
-			<HeaderWithLogOut/>
+		
 			<div className='homepage-container'>
 				<div className='homepage-row'>
 					<Link to='#'><button>View Orders</button></Link>

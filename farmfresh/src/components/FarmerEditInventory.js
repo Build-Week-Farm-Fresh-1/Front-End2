@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { axiosWithAuth } from '../utils/axiosWithAuth';
-import HeaderWithLogOut from './HeaderWithLogOut';
 import FarmerGoBackButton from './FarmerGoBackButton';
 import { FarmerEditInventoryContext } from './contexts/FarmerEditInventoryContext';
 
@@ -74,7 +73,6 @@ const AddInventory = () => {
 
 	return (
 		<div>
-			<HeaderWithLogOut/>
 			
 			<FarmerGoBackButton/>
 			
