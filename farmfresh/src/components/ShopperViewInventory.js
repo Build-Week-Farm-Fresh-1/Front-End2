@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react';
+import {Link} from 'react-router-dom';
 import {useParams} from 'react-router-dom';
 import {axiosWithAuth} from '../utils/axiosWithAuth';
 import ShopperGoBackButton from './ShopperGoBackButton';
@@ -57,7 +58,7 @@ const ShopperViewInventory = (props) => {
 						);
 					})}
 				</form>
-				<button className='cart-button'>Add to Cart</button>
+				<Link to='#'><button>Add to Cart</button></Link>
 			</div>
 		</div>
 	);
