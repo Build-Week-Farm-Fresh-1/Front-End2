@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  color: #495057;
 }
 
 .App-logo {
@@ -39,22 +40,29 @@
   align-items: center;
   padding: 0 16px;
   margin: 1rem;
+  z-index: 9999;
 
   font-family: Fira Sans;
   font-style: normal;
   font-weight: normal;
   font-size: 20px;
   line-height: 141%;
-
+  position: fixed;
   /* Dark Accent */
 
   background: #1f2a4c;
+}
+.nav-content a {
+  text-decoration: none;
+  color: #d8e7ed;
 }
 button {
   left: 0%;
   right: 0%;
   top: 0%;
   bottom: 0%;
+
+  cursor: pointer;
 
   max-width: width 250px;
   margin: 32px 0;
@@ -71,14 +79,57 @@ button {
   background: #7faecc;
   border-radius: 8px;
 }
+
+.md-button:active {
+  box-shadow: 0px 5px 5px -3px rgba(0, 0, 0, 0.2),
+    0px 8px 10px 1px rgba(0, 0, 0, 0.14), 0px 3px 14px 2px rgba(0, 0, 0, 0.12);
+}
+
+.md-button:disabled {
+  color: rgba(0, 0, 0, 0.38);
+  background-color: rgba(0, 0, 0, 0.12);
+  box-shadow: none;
+  cursor: initial;
+}
+
+.md-button::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background-color: currentColor;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+.md-button:focus {
+  box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2),
+    0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);
+}
+.md-button:hover::before {
+  opacity: 0.12;
+}
+
+.md-button:focus::before {
+  opacity: 0.2;
+}
+
+.md-button:active::before {
+  opacity: 0.32;
+}
+
+.md-button:disabled::before {
+  opacity: 0;
+}
 .newAccount-form {
   position: absolute;
-  width: 32%;
+  width: 35%;
   height: 100%;
   left: 715px;
   top: 16%;
 
-  margin: auto 100px;
+  margin: auto 80px;
   padding: 32px;
   font-weight: bold;
 
@@ -93,7 +144,8 @@ button {
   left: 0;
   height: 25px;
   width: 25px;
-  background-color: #eee;
+  background-color: white;
+  border: solid #282c34;
 }
 .checkbox-container {
   display: block;
@@ -119,26 +171,14 @@ button {
   display: block;
 }
 
-/* Style the checkmark/indicator */
-.checkbox-container .checkmark:after {
-  left: 9px;
-  top: 5px;
-  width: 5px;
-  height: 10px;
-  border: solid rgb(36, 33, 33);
-  border-width: 0 3px 3px 0;
-  -webkit-transform: rotate(45deg);
-  -ms-transform: rotate(45deg);
-  transform: rotate(45deg);
-}
 /* On mouse-over, add a grey background color */
 .checkbox-container:hover input ~ .checkmark {
-  background-color: #7faecc;
+  background-color: grey;
 }
 
 /* When the checkbox is checked, add a blue background */
 .checkbox-container input:checked ~ .checkmark {
-  background-color: #5eb7b3;
+  background-color: #7faecc;
 }
 input,
 textarea {
@@ -151,7 +191,6 @@ textarea {
   text-align: left;
   width: 100%;
   display: block;
-  color: #4d2d52;
 
   background: #ffffff;
   border-radius: 3px;
@@ -167,18 +206,8 @@ textarea {
   font-weight: normal;
   font-size: 16px;
   line-height: 148%;
-  /* identical to box height, or 24px */
-
-  /* Grey 1 */
 
   color: #495057;
-  /* margin-top: 32px;
-  padding: 0.5rem;
-  font-size: 16px;
-  width: 100%;
-  display: block;
-  color: #4d2d52;
-  border: 2px solid rgba(77, 45, 82, 0.8); */
 }
 input:focus {
   border-color: #007eff;
@@ -202,49 +231,19 @@ img {
   display: flex;
   align-items: flex-start;
 
-  /* position: absolute;
-  width: 32%;
-  height: 80%;
-  left: 715px;
-  top: 11%; */
-
-  /* margin: auto 100px; */
   padding: 32px;
 }
-
-/* .logo {
-  position: absolute;
-  left: 0%;
-  right: 86.53%;
-  top: 0%;
-  bottom: 0%;
-  color: #d8e7ed;
-  background: #1f2a4c;
+.bottom {
+  font-size: 0.8rem;
   display: flex;
   align-items: center;
 }
-.shop {
-  position: absolute;
-  left: 13.47%;
-  right: 76.53%;
-  top: 0%;
-  bottom: 0%;
-  color: #d8e7ed;
-
-  /* Dark Accent */
-
-/* background: #1f2a4c;
-} */
-/* .farms {
-  position: absolute;
-  left: 13.47%;
-  right: 76.53%;
-  top: 0%;
-  bottom: 0%;
-  color: #d8e7ed;
-  display: flex;
-  align-items: center;
-  /* Dark Accent */
-
-/* background: #1f2a4c;
-} */
+.bottom a {
+  text-decoration: none;
+  font-size: 1rem;
+  color: red;
+  padding: 2%;
+}
+a:hover {
+  color: #7faecc;
+}

@@ -1,17 +1,12 @@
 import React from "react";
-import Navigation from "./components/Navigation";
-import NewAccountForm from "./components/NewAccountForm";
-import Picture from "./components/Picture";
+import NewAccountPage from "./components/NewAccountPage";
 import "./App.css";
+import SignInPage from "./components/SignInPage";
 
 function App() {
   return (
     <div className="App">
-      <Navigation />
-      <div>
-        <Picture />
-        <NewAccountForm />
-      </div>
+      <NewAccountPage />
     </div>
   );
 }

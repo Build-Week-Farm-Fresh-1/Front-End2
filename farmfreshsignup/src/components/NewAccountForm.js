@@ -17,39 +17,35 @@ const NewAccountForm = ({ values, errors, touched, status }) => {
         <Field id="firstName" type="text" name="firstName" />
         <label htmlFor="lastName">Last Name</label>
         <Field id="lastName" type="text" name="lastName" />
-        <label htmlFor="phoneNumber">Phone Number</label>
-        <Field id="phoneNumber" type="text" name="phoneNumber" />
+        <label htmlFor="email">Email Address</label>
+        <Field id="email" type="text" name="email" />
         <label htmlFor="password">Password</label>
         <Field id="password" type="password" name="password" />
-
         <label className="checkbox-container">
           I have read the Terms and Conditions
           <Field
             id="termsConditions"
-            type="chekbox"
+            type="checkbox"
             name="termsConditions"
             checked={values.termsConditions}
           />
           <span className="checkmark" />
         </label>
-
         <button type="submit">Create and Account</button>
+        <div className="bottom">
+          <p>Have an account? </p>
+          <a href="#"> Sign In</a>
+        </div>
       </Form>
     </div>
   );
 };
 const FormikNewAccForm = withFormik({
-  mapPropsToValues({
-    firstName,
-    lastName,
-    phoneNumber,
-    password,
-    termsConditions
-  }) {
+  mapPropsToValues({ firstName, lastName, email, password, termsConditions }) {
     return {
       firstName: firstName || "",
       lastName: lastName || "",
-      phoneNumber: phoneNumber || "",
+      emial: email || "",
       password: password || "",
       termsConditions: false
     };
