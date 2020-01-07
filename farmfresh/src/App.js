@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import {Route} from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Homepage from "./components/Home";
+import Cart from "./components/Cart";
 import './App.css';
 
 import CartContext from "./components/contexts/CartContext";
@@ -28,9 +29,13 @@ function App() {
   }
   return (
     <div className="App">
-      <CartContext.Provider value={{cart, setCart}}>
+      
       <Navbar/>
       <Route exact path="/" component={Homepage}/>
+       
+       <CartContext.Provider value={{cart, setCart}}>
+      <Route exact path="/cart" component={Cart}/>
+      
       </CartContext.Provider>
     </div>
   );
