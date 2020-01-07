@@ -57,7 +57,7 @@ const ShopperViewInventory = (props) => {
 						);
 					})}
 				</form>
-				<button className='farmer-sign-in-button'>Add to Cart</button>
+				<button className='cart-button'>Add to Cart</button>
 			</div>
 		</div>
 	);
