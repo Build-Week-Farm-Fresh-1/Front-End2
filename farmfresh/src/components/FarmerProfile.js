@@ -1,5 +1,4 @@
 import React from 'react';
-import Header from './Header';
 import {Formik, Form, Field, ErrorMessage} from 'formik';
 import {axiosWithAuth} from '../utils/axiosWithAuth';
 import FarmerGoBackButton from './FarmerGoBackButton';
@@ -28,7 +27,6 @@ const validate = ({ farm_name, farm_address }) => {
 const FarmerProfile = (props) => {
 	return (
 		<div>
-			<Header/>
 			<FarmerGoBackButton/>
 			<section className='farmer-and-shopper-sign-in-page-section'>
 				<h2>Create A Farm Profile</h2>
