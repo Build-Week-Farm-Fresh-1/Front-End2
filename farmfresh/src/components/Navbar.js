@@ -13,9 +13,9 @@ const Navbar = () => {
   return (
     <div className="nav-content">
       <Logo />
-      <Shop />
-      <Farms />
-      <Account />
+      <Link to="shopperinventory"><Shop /></Link>
+     <Link to="farmerprofile"><Farms /></Link> 
+     <Link to="/shopperhome"> <Account /></Link>
       <Search />
       <Link to="/login"><SignIn/></Link>
       <SellerBtn />
