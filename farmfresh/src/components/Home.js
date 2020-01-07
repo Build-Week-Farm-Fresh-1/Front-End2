@@ -13,6 +13,8 @@ const Homepage = () => {
             <p>Buy fresh from the farmers in your area.</p>
             <p>Get your produce straight out of the fields.</p>
             </div>
+        
+        </div>
 
     )
 
