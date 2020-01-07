@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { withFormik, Form, Field } from "formik";
 import axios from "axios";
+import { Link } from "react-router-dom";
 import * as Yup from "yup";
 
 const SignInForm = ({ values, errors, touched, status }) => {
@@ -21,7 +22,7 @@ const SignInForm = ({ values, errors, touched, status }) => {
         <button type="submit">Sign In</button>
         <div className="bottom">
           <p>Don't have an account? </p>
-          <a href="#"> Create One</a>
+          <Link to="/SignInPage"> Create One</Link>
         </div>
       </Form>
     </div>

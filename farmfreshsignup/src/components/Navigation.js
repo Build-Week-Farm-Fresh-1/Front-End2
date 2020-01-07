@@ -1,48 +1,42 @@
 import React from "react";
-import { Link, Switch, Route } from "react-router-dom";
+import { NavLink, Link, Route } from "react-router-dom";
 import Logo from "./Logo";
 import Shop from "./Shop";
 import Farms from "./Farms";
 import Account from "./Account";
 import Search from "./Search";
-import SignIn from "./SignIn";
+
 import SellerBtn from "./SellerBtn";
 import SignInPage from "./SignInPage";
+import NewAccountPage from "./NewAccountPage";
 
 const Navigation = () => {
   return (
     <>
-      <nav>
-        <div className="nav-content">
-          <Link to="/">FarmerPal</Link>
-          <Link to="/shop">Shop</Link>
-          <Link to="/farms">Farms</Link>
-          <Link to="/account">Account</Link>
-          <Search />
-          <Link to="/signIn">Sign In</Link>
-          <SellerBtn />
-        </div>
-      </nav>
-      <Switch>
-        <Route exact path="/">
-          <Logo />
-        </Route>
-        <Route exact path="/shop">
-          <Shop />
-        </Route>
-        <Route exact path="/farms">
-          <Farms />
-        </Route>
-        <Route exact path="/account">
-          <Account />
-        </Route>
-        <Route exact path="/signIn">
-          <SignInPage />
-        </Route>
-        <Route exact path="/signIn">
-          <SignIn />
-        </Route>
-      </Switch>
+      <div className="nav-content">
+        <NavLink to="/logo">FarmerPal</NavLink>
+        <NavLink to="/shop">Shop</NavLink>
+        <NavLink to="/farms">Farms</NavLink>
+        <NavLink to="/account">Account</NavLink>
+        <Search />
+        <NavLink to="/signIn">Sign In</NavLink>
+        <SellerBtn />
+      </div>
+      <Route path="/">
+        <Logo />
+      </Route>
+      <Route path="/shop">
+        <Shop />
+      </Route>
+      <Route path="/farms">
+        <Farms />
+      </Route>
+      <Route path="/signIn">
+        <SignInPage />
+      </Route>
+      <Route path="/account">
+        <Account />
+      </Route>
     </>
   );
 };

@@ -56,6 +56,10 @@
   text-decoration: none;
   color: #d8e7ed;
 }
+.nav-content a.active,
+.nav-content a:hover {
+  border-bottom: 1px solid #1c5d76;
+}
 button {
   left: 0%;
   right: 0%;
