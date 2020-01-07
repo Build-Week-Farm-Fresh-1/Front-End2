@@ -36,3 +36,34 @@
     transform: rotate(360deg);
   }
 }
+.home{
+  width:100%;
+  height: 100%;
+ background-color: #1F2A4C;
+
+}
+.main-image{
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("https://s3-alpha-sig.figma.com/img/536c/8cc0/19af9914fd389874fa40c450f8465269?Expires=1579478400&Signature=WjWV9Ds9bDm1rxfXplkyGfklfXMjerm~uw338q8DJYfe1jampDHI2T0sGfEWTQj5bT~25rcryhw3n8K1oKmpnN9mKdlj30AKjW1Ryf7AYkDoBtpWG~slGoP5TV9N5oWrnCdUchFDyEvD-sjjmcpkMReODH284d4RJaxTEVd73qiWoCJkU5R3gUqTKFRX-k3RLPbHQwlG~99tIrqSyIbVYN7b8nFuKV0f1sWqM9bz1dKJbbd0H9upCEe79HHHycQKoGPHdbjMwWK2AQRFkQJc1RCoShEHFraouOqC8qwO3xQwKWdLw-eeoxgoOv0bp6p97~7WRBLRC4jl9s6gVcLnVQ__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+}
+.image-text{
+  text-align: center;
+  position: absolute;
+  top: 56%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: 2rem
+}
+.image-text-small{
+  text-align: center;
+  position: absolute;
+  top: 65%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: 1.5rem
+}
