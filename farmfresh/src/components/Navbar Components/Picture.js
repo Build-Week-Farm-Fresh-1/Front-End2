@@ -1,9 +1,9 @@
 import React from "react";
-import picture from "../images/Register:Log in.jpg";
+import picture from "../images/register.jpg";
 
 const Picture = () => (
-  <div>
-    <img src={picture} alt="carrot field pic" />
+  <div className="pictureLogin">
+    <img width="95%" padding="1%" src={picture} alt="carrot field pic" />
   </div>
 );
 

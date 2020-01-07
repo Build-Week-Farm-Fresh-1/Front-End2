@@ -183,12 +183,16 @@ button {
 .md-button:disabled::before {
   opacity: 0;
 }
+
+.pictureLogin{
+  width: 100%;
+}
 .newAccount-form {
   position: absolute;
-  width: 35%;
+  width: 30%;
   height: 100%;
-  left: 715px;
-  top: 16%;
+  left: 50%;
+  top: 25%;
 
   margin: auto 80px;
   padding: 32px;
@@ -198,6 +202,12 @@ button {
 
   background: #f1f3f6;
   backdrop-filter: blur(10px);
+}
+
+.createOne{
+  
+  padding: 0 10%;
+  font-size: 1.6rem;
 }
 .checkmark {
   position: absolute;
@@ -311,6 +321,12 @@ a:hover {
 
 .navigation{
   padding-bottom: 2%;
+}
+
+{/* New Account Form */}
+
+.newAccount-form{
+  
 }
 
 

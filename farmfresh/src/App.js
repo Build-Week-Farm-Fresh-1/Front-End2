@@ -3,6 +3,7 @@ import {Route} from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Homepage from "./components/Home";
 import Cart from "./components/Cart";
+import SignIn from "./components/SignInPage";
 import './App.css';
 
 import CartContext from "./components/contexts/CartContext";
@@ -32,7 +33,7 @@ function App() {
       
       <Navbar/>
       <Route exact path="/" component={Homepage}/>
-       
+      <Route exact path="/login" component={SignIn} />
        <CartContext.Provider value={{cart, setCart}}>
       <Route exact path="/cart" component={Cart}/>
       

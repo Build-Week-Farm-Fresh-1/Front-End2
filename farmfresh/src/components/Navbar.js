@@ -7,6 +7,8 @@ import Search from "../components/Navbar Components/Search";
 import SignIn from "../components/Navbar Components/SignIn";
 import SellerBtn from "../components/Navbar Components/SellerBtn";
 
+import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
+
 const Navbar = () => {
   return (
     <div className="nav-content">
@@ -15,7 +17,7 @@ const Navbar = () => {
       <Farms />
       <Account />
       <Search />
-      <SignIn />
+      <Link to="/login"><SignIn/></Link>
       <SellerBtn />
     </div>
   );
