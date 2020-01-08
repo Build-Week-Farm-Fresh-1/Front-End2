@@ -18,7 +18,7 @@ const Navbar = () => {
      <Link to="/shopperhome"> <Account /></Link>
       <Search />
       <Link to="/login"><SignIn/></Link>
-      <SellerBtn />
+      <Link to="/farmerlogin"><SellerBtn /></Link>
     </div>
   );
 };

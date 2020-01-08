@@ -3,7 +3,7 @@ import { withFormik, Form, Field } from "formik";
 import axios from "axios";
 import * as Yup from "yup";
 
-const SignInForm = ({ values, errors, touched, status }) => {
+const FarmerLoginForm = ({ values, errors, touched, status }) => {
   const [users, setUsers] = useState([]);
   useEffect(() => {
     console.log("status has changed", status);
@@ -12,7 +12,7 @@ const SignInForm = ({ values, errors, touched, status }) => {
   return (
     <div className="newAccount-form">
       <Form>
-        <h1>Customer Sign In</h1>
+        <h1>Farmer Login</h1>
         <label htmlFor="email">Email Address</label>
         <Field id="email" type="email" name="email" />
         <label htmlFor="password">Password</label>
@@ -21,13 +21,13 @@ const SignInForm = ({ values, errors, touched, status }) => {
         <button type="submit">Sign In</button>
         <div className="bottom">
           <p>Don't have an account? </p>
-          <a className="createOne" href="/create"> Create One</a>
+          <a className="createOne" href="/createfarmer"> Create One</a>
         </div>
       </Form>
     </div>
   );
 };
-const FormikSignInForm = withFormik({
+const FormikFarmerLoginForm = withFormik({
   mapPropsToValues({ email, password }) {
     return {
       email: email || "",
@@ -45,5 +45,5 @@ const FormikSignInForm = withFormik({
       setStatus(response.data);
     });
   }
-})(SignInForm);
-export default FormikSignInForm;
+})(FarmerLoginForm);
+export default FormikFarmerLoginForm;

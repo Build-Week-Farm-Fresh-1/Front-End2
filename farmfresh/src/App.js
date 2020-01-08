@@ -14,6 +14,8 @@ import ShopperHomepage from './components/ShopperHomepage';
 import FarmerProfile from './components/FarmerProfile';
 
 import PrivateRoute from "./components/PrivateRoute";
+import FarmerLogin from './components/FarmerLogin';
+import NewFarmer from "./components/NewFarmer";
 
 
 
@@ -45,9 +47,11 @@ function App() {
       <Route exact path="/" component={Homepage}/>
       <Route exact path="/login" component={SignIn} />
       <Route exact path="/create" component={NewAccountPage}/>
+      <Route exact path="/farmerlogin" component={FarmerLogin}/>
+      <Route exact path="/createfarmer" component={NewFarmer}/>
       <Switch>
       <CartContext.Provider value={{cart, setCart}}>
-        
+
       <PrivateRoute path="/shopperinventory" component={ShopperViewInventory}/>
       <PrivateRoute exact path="/shopperhome" component={ShopperHomepage}/>
       <PrivateRoute exact path="/farmerprofile" component={FarmerProfile}/>

@@ -1,5 +1,5 @@
 import React from "react";
 
-const SellerBtn = () => <button>Click Here to Sell</button>;
+const SellerBtn = () => <button>Farmer Login</button>;
 
 export default SellerBtn;
