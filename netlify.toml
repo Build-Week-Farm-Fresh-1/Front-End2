@@ -1,4 +1,4 @@
-[[redirects]]
-from = "/*"
-to = "/index.html"
-status = 200
+[build]
+base = "farmfresh/"
+publish = "farmfresh/build/"
+command = "yarn build"
