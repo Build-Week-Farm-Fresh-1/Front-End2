@@ -2,14 +2,22 @@ import React, { useState, useEffect } from "react";
 import { withFormik, Form, Field } from "formik";
 import axios from "axios";
 import { Link } from "react-router-dom";
+
 import * as Yup from "yup";
 
 const SignInForm = ({ values, errors, touched, status }) => {
+  console.log("values are", values);
+  //Checking for changes on state
   const [users, setUsers] = useState([]);
   useEffect(() => {
-    console.log("status has changed", status);
-    status && setUsers(user => [...users, status]);
-  }, []);
+    console.log("status has changed!", status);
+    status && setUsers(users => [...users, status]);
+  }, [status]);
+  // const [users, setUsers] = useState([]);
+  // useEffect(() => {
+  //   console.log("status has changed", status);
+  //   status && setUsers(user => [...users, status]);
+  // }, []);
   return (
     <div className="newAccount-form">
       <Form>
@@ -22,7 +30,7 @@ const SignInForm = ({ values, errors, touched, status }) => {
         <button type="submit">Sign In</button>
         <div className="bottom">
           <p>Don't have an account? </p>
-          <Link to="/SignInPage"> Create One</Link>
+          <Link to="/"> Create One</Link>
         </div>
       </Form>
     </div>

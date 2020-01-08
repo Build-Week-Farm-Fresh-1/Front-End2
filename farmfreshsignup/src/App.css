@@ -36,6 +36,14 @@
 
   padding: 12px;
 }
+.shoppingCart-img img {
+  max-width: 10%;
+  max-height: 10%;
+  display: flex;
+  align-items: flex-end;
+  margin-right: 0px;
+  padding: 0px;
+}
 .nav-content {
   position: absolute;
   width: 100%;
