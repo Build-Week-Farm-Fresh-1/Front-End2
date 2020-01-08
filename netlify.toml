@@ -1,0 +1,4 @@
+[build]
+base = "farmfresh/"
+publish = "farmfresh/build/"
+command = "yarn build"
