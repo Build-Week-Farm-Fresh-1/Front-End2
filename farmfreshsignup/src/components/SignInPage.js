@@ -6,7 +6,7 @@ import SignInForm from "./SignInForm";
 const SignInPage = () => {
   return (
     <>
-      <Navigation />
+      {/* <Navigation /> */}
       <Picture />
       <SignInForm />
     </>

@@ -28,6 +28,14 @@
 .App-link {
   color: #61dafb;
 }
+.logo-pic img {
+  max-width: 70%;
+  max-height: 70%;
+  display: flex;
+  align-items: flex-start;
+
+  padding: 12px;
+}
 .nav-content {
   position: absolute;
   width: 100%;
@@ -51,6 +59,10 @@
   /* Dark Accent */
 
   background: #1f2a4c;
+}
+.subnav-content {
+  display: flex;
+  align-content: space-between;
 }
 .nav-content a {
   text-decoration: none;

@@ -8,7 +8,7 @@ const NewAccountForm = ({ values, errors, touched, status }) => {
   useEffect(() => {
     console.log("status has changed", status);
     status && setUsers(user => [...users, status]);
-  }, []);
+  }, [status]);
   return (
     <div className="newAccount-form">
       <Form>

@@ -6,7 +6,7 @@ import NewAccountForm from "./NewAccountForm";
 const NewAccountPage = () => {
   return (
     <>
-      <Navigation />
+      {/* <Navigation /> */}
       <Picture />
       <NewAccountForm />
     </>
