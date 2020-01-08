@@ -2,9 +2,12 @@ import React, { useState, useEffect } from "react";
 import { withFormik, Form, Field } from "formik";
 import axios from "axios";
 import * as Yup from "yup";
+import { axiosWithAuth } from "../utils/axiosWithAuth";
+import { useHistory } from "react-router-dom";
 
 const NewFarmerForm = ({ values, errors, touched, status }) => {
   const [users, setUsers] = useState([]);
+  let history = useHistory();
   useEffect(() => {
     console.log("status has changed", status);
     status && setUsers(user => [...users, status]);
@@ -31,7 +34,7 @@ const NewFarmerForm = ({ values, errors, touched, status }) => {
           />
           <span className="checkmark" />
         </label>
-        <button type="submit">Create and Account</button>
+        <button type="submit">Create an Account</button>
         <div className="bottom">
           <p>Have an account? </p>
           <a href="/farmerlogin"> Sign In</a>
@@ -45,7 +48,7 @@ const FormikNewFarmerForm = withFormik({
     return {
       firstName: firstName || "",
       lastName: lastName || "",
-      emial: email || "",
+      email: email || "",
       password: password || "",
       termsConditions: false
     };
@@ -56,7 +59,9 @@ const FormikNewFarmerForm = withFormik({
   }),
   handleSubmit(values, { setStatus }) {
     console.log("submitting", values);
-    axios.post("https://regres.in/api/users/", values).then(response => {
+    axiosWithAuth().post("/farmers/register", values).then(response => {
+        localStorage.setitem("token", response.data.payload);
+        useHistory().push("/farmerprofile");
       console.log("success", response);
       setStatus(response.data);
     });
