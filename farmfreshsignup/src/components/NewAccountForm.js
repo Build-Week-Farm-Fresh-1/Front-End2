@@ -81,8 +81,8 @@ const FormikNewAccForm = withFormik({
     };
   },
   validationSchema: Yup.object().shape({
-    firstName: Yup.string().required(),
-    lastName: Yup.string().required("Name is required"),
+    firstName: Yup.string().required("Name is required"),
+    lastName: Yup.string().required("Last name is required"),
     email: Yup.string()
       .email()
       .required(),

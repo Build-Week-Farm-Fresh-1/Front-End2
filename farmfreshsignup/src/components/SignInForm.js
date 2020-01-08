@@ -13,19 +13,25 @@ const SignInForm = ({ values, errors, touched, status }) => {
     console.log("status has changed!", status);
     status && setUsers(users => [...users, status]);
   }, [status]);
-  // const [users, setUsers] = useState([]);
-  // useEffect(() => {
-  //   console.log("status has changed", status);
-  //   status && setUsers(user => [...users, status]);
-  // }, []);
+
   return (
     <div className="newAccount-form">
       <Form>
         <h1>Sign in to account</h1>
-        <label htmlFor="email">Email Address</label>
-        <Field id="email" type="email" name="email" />
-        <label htmlFor="password">Password</label>
-        <Field id="password" type="password" name="password" />
+        <label htmlFor="email">
+          Email Address
+          <Field id="email" type="email" name="email" />
+          {touched.email && errors.email && (
+            <p className="errors">{errors.email}</p>
+          )}
+        </label>
+        <label htmlFor="password">
+          Password
+          <Field id="password" type="password" name="password" />
+          {touched.password && errors.password && (
+            <p className="errors">{errors.password}</p>
+          )}
+        </label>
 
         <button type="submit">Sign In</button>
         <div className="bottom">
@@ -44,15 +50,20 @@ const FormikSignInForm = withFormik({
     };
   },
   validationSchema: Yup.object().shape({
-    email: Yup.string().required(),
+    email: Yup.string()
+      .email()
+      .required(),
     password: Yup.string().required("Password is required")
   }),
   handleSubmit(values, { setStatus }) {
     console.log("submitting", values);
-    axios.post("https://regres.in/api/users/", values).then(response => {
-      console.log("success", response);
-      setStatus(response.data);
-    });
+    axios
+      .post("https://regres.in/api/users/", values)
+      .then(response => {
+        console.log("success", response);
+        setStatus(response.data);
+      })
+      .catch(error => console.log(error.response));
   }
 })(SignInForm);
 export default FormikSignInForm;
