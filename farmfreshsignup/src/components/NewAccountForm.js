@@ -4,7 +4,14 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import * as Yup from "yup";
 
-const NewAccountForm = ({ values, errors, touched, status }) => {
+const NewAccountForm = ({
+  values,
+  errors,
+  touched,
+  status,
+  isSubmitting,
+  handleSubmit
+}) => {
   console.log("values are", values);
   //Checking for changes on state
   const [users, setUsers] = useState([]);
@@ -22,25 +29,44 @@ const NewAccountForm = ({ values, errors, touched, status }) => {
           <Field
             id="firstName"
             type="text"
+            value={values.firstName}
             name="firstName"
             autoComplete="off"
           />
           {touched.firstName && errors.firstName && (
-            <p className="errors">{errors.firstName}</p>
+            <div className="input-feedback">
+              <p>{errors.firstName}</p>
+            </div>
           )}
         </label>
         <label htmlFor="lastName">
           Last Name
-          <Field id="lastName" type="text" name="lastName" autoComplete="off" />
+          <Field
+            id="lastName"
+            type="text"
+            value={values.lastName}
+            name="lastName"
+            autoComplete="off"
+          />
           {touched.lastName && errors.lastName && (
-            <p className="errors">{errors.lastName}</p>
+            <div className="input-feedback">
+              <p>{errors.lastName}</p>
+            </div>
           )}
         </label>
         <label htmlFor="email">
           Email Address
-          <Field id="email" type="text" name="email" autoComplete="off" />
+          <Field
+            id="email"
+            type="text"
+            value={values.email}
+            name="email"
+            autoComplete="off"
+          />
           {touched.email && errors.email && (
-            <p className="errors">{errors.email}</p>
+            <div className="input-feedback">
+              <p>{errors.email}</p>
+            </div>
           )}
         </label>
         <label htmlFor="password">
@@ -48,20 +74,29 @@ const NewAccountForm = ({ values, errors, touched, status }) => {
           <Field
             id="password"
             type="password"
+            value={values.password}
             name="password"
             autoComplete="off"
           />
           {touched.password && errors.password && (
-            <p className="errors">{errors.password}</p>
+            <div className="input-feedback">
+              <p>{errors.password}</p>
+            </div>
           )}
         </label>
         <label htmlFor="tos" className="checkbox-container">
           I have read the Terms and Conditions
           <Field id="tos" type="checkbox" name="tos" checked={values.tos} />
-          {touched.tos && errors.tos && <p className="errors">{errors.tos}</p>}
+          {touched.tos && errors.tos && (
+            <div className="input-feedback">
+              <p>{errors.tos}</p>
+            </div>
+          )}
           <span className="checkmark" />
         </label>
-        <button type="submit">Create and Account</button>
+        <button type="submit" disabled={isSubmitting}>
+          Create and Account
+        </button>
         <div className="bottom">
           <p>Have an account? </p>
           <Link to="/login"> Sign In</Link>
@@ -94,7 +129,7 @@ const FormikNewAccForm = withFormik({
   handleSubmit(values, { setStatus, resetForm }) {
     console.log("submitting", values);
     axios
-      .post("https://regres.in/api/users/", values)
+      .post("https://farmers-fresh-api.herokuapp.com/api/users/login", values)
       .then(response => {
         console.log("success", response);
         setStatus(response.data);

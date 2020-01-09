@@ -262,13 +262,13 @@ input:focus {
     0 0 0 3px rgba(0, 126, 255, 0.1);
   outline: none;
 }
-p .error {
+.errors {
   margin: 0;
   position: absolute;
   color: red;
 }
 
-input.error {
+input.errors {
   border-color: red;
 }
 
@@ -279,6 +279,7 @@ label {
 }
 .input-feedback {
   color: red;
+  font-size: 14px;
   margin-top: 0.25rem;
 }
 img {

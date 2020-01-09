@@ -22,14 +22,14 @@ const SignInForm = ({ values, errors, touched, status }) => {
           Email Address
           <Field id="email" type="email" name="email" />
           {touched.email && errors.email && (
-            <p className="errors">{errors.email}</p>
+            <p className="input-feedback">{errors.email}</p>
           )}
         </label>
         <label htmlFor="password">
           Password
           <Field id="password" type="password" name="password" />
           {touched.password && errors.password && (
-            <p className="errors">{errors.password}</p>
+            <p className="input-feedback">{errors.password}</p>
           )}
         </label>
 
@@ -58,7 +58,7 @@ const FormikSignInForm = withFormik({
   handleSubmit(values, { setStatus }) {
     console.log("submitting", values);
     axios
-      .post("https://regres.in/api/users/", values)
+      .post("https://farmers-fresh-api.herokuapp.com/api/users/login", values)
       .then(response => {
         console.log("success", response);
         setStatus(response.data);
