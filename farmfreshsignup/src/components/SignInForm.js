@@ -18,11 +18,11 @@ const SignInForm = ({ values, errors, touched, status }) => {
     <div className="newAccount-form">
       <Form>
         <h1>Sign in to account</h1>
-        <label htmlFor="email">
-          Email Address
-          <Field id="email" type="email" name="email" />
-          {touched.email && errors.email && (
-            <p className="input-feedback">{errors.email}</p>
+        <label htmlFor="username">
+          Name:
+          <Field id="username" type="text" name="username" />
+          {touched.username && errors.username && (
+            <p className="input-feedback">{errors.username}</p>
           )}
         </label>
         <label htmlFor="password">
@@ -43,25 +43,24 @@ const SignInForm = ({ values, errors, touched, status }) => {
   );
 };
 const FormikSignInForm = withFormik({
-  mapPropsToValues({ email, password }) {
+  mapPropsToValues({ username, password }) {
     return {
-      email: email || "",
+      username: username || "",
       password: password || ""
     };
   },
   validationSchema: Yup.object().shape({
-    email: Yup.string()
-      .email()
-      .required(),
+    username: Yup.string().required(),
     password: Yup.string().required("Password is required")
   }),
-  handleSubmit(values, { setStatus }) {
+  handleSubmit(values, { setStatus, resetForm }) {
     console.log("submitting", values);
     axios
-      .post("https://farmers-fresh-api.herokuapp.com/api/users/login", values)
+      .post("https://reqres.in/api/users", values)
       .then(response => {
         console.log("success", response);
         setStatus(response.data);
+        resetForm();
       })
       .catch(error => console.log(error.response));
   }

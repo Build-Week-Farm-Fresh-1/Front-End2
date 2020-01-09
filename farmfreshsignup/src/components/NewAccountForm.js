@@ -4,17 +4,12 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import * as Yup from "yup";
 
-const NewAccountForm = ({
-  values,
-  errors,
-  touched,
-  status,
-  isSubmitting,
-  handleSubmit
-}) => {
+const NewAccountForm = ({ values, errors, touched, status, isSubmitting }) => {
   console.log("values are", values);
   //Checking for changes on state
   const [users, setUsers] = useState([]);
+  //To redirect the page to home page after submitting
+  // const [toHome, setToHome] = useState(false);
   useEffect(() => {
     console.log("status has changed!", status);
     status && setUsers(users => [...users, status]);
@@ -24,63 +19,54 @@ const NewAccountForm = ({
     <div className="newAccount-form">
       <Form>
         <h1>Create new account</h1>
-        <label htmlFor="firstName">
-          First Name:
-          <Field
-            id="firstName"
-            type="text"
-            value={values.firstName}
-            name="firstName"
-            autoComplete="off"
-          />
-          {touched.firstName && errors.firstName && (
+        <label htmlFor="username">
+          Enter your name:
+          <Field id="username" type="text" name="username" autoComplete="off" />
+          {touched.username && errors.username && (
             <div className="input-feedback">
-              <p>{errors.firstName}</p>
+              <p>{errors.username}</p>
             </div>
           )}
         </label>
-        <label htmlFor="lastName">
-          Last Name
-          <Field
-            id="lastName"
-            type="text"
-            value={values.lastName}
-            name="lastName"
-            autoComplete="off"
-          />
-          {touched.lastName && errors.lastName && (
-            <div className="input-feedback">
-              <p>{errors.lastName}</p>
-            </div>
-          )}
-        </label>
-        <label htmlFor="email">
-          Email Address
-          <Field
-            id="email"
-            type="text"
-            value={values.email}
-            name="email"
-            autoComplete="off"
-          />
-          {touched.email && errors.email && (
-            <div className="input-feedback">
-              <p>{errors.email}</p>
-            </div>
-          )}
-        </label>
+
         <label htmlFor="password">
-          Password
+          Password:
           <Field
             id="password"
             type="password"
-            value={values.password}
             name="password"
             autoComplete="off"
           />
           {touched.password && errors.password && (
             <div className="input-feedback">
               <p>{errors.password}</p>
+            </div>
+          )}
+        </label>
+        <label htmlFor="city">
+          City:
+          <Field id="city" type="text" name="city" autoComplete="off" />
+          {touched.city && errors.city && (
+            <div className="input-feedback">
+              <p>{errors.city}</p>
+            </div>
+          )}
+        </label>
+        <label htmlFor="state">
+          State:
+          <Field id="state" type="text" name="state" autoComplete="off" />
+          {touched.state && errors.state && (
+            <div className="input-feedback">
+              <p>{errors.state}</p>
+            </div>
+          )}
+        </label>
+        <label htmlFor="zipCode">
+          Zip Code:
+          <Field id="zipCode" type="number" name="zipCode" autoComplete="off" />
+          {touched.zipCode && errors.zipCode && (
+            <div className="input-feedback">
+              <p>{errors.zipCode}</p>
             </div>
           )}
         </label>
@@ -95,7 +81,8 @@ const NewAccountForm = ({
           <span className="checkmark" />
         </label>
         <button type="submit" disabled={isSubmitting}>
-          Create and Account
+          {isSubmitting ? "SUBMITTING" : "Create an Account"}
+          {/* {toHome ? <Redirect to="/home" /> : null} */}
         </button>
         <div className="bottom">
           <p>Have an account? </p>
@@ -106,36 +93,41 @@ const NewAccountForm = ({
   );
 };
 const FormikNewAccForm = withFormik({
-  mapPropsToValues({ firstName, lastName, email, password, tos }) {
+  mapPropsToValues({ username, password, city, state, zipCode, tos }) {
     return {
-      firstName: firstName || "",
-      lastName: lastName || "",
-      email: email || "",
+      username: username || "",
       password: password || "",
+      city: city || "",
+      state: state || "",
+      zipCode: zipCode || "",
       tos: false
     };
   },
   validationSchema: Yup.object().shape({
-    firstName: Yup.string().required("Name is required"),
-    lastName: Yup.string().required("Last name is required"),
-    email: Yup.string()
-      .email()
-      .required(),
+    username: Yup.string().required("Name is required"),
     password: Yup.string()
       .min(4, "Password must be 4 characters or longer")
       .required(),
+    city: Yup.string().required("City is required"),
+    state: Yup.string().required(),
+    zipCode: Yup.number().required(),
     tos: Yup.boolean().oneOf([true], "Must approve to submit")
   }),
-  handleSubmit(values, { setStatus, resetForm }) {
+  handleSubmit(values, { setStatus, resetForm, setSubmitting }) {
     console.log("submitting", values);
     axios
-      .post("https://farmers-fresh-api.herokuapp.com/api/users/login", values)
+      .post("https://reqres.in/api/users", values)
       .then(response => {
         console.log("success", response);
+
         setStatus(response.data);
         resetForm();
       })
-      .catch(error => console.log(error.response));
+      .catch(error => console.log(error.response))
+      .finally(() => {
+        setSubmitting(false);
+        // setToHome(true);
+      });
   }
 })(NewAccountForm);
 export default FormikNewAccForm;
