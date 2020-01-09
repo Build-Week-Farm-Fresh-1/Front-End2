@@ -4,64 +4,76 @@ import {useParams} from 'react-router-dom';
 import {axiosWithAuth} from '../utils/axiosWithAuth';
 import ShopperGoBackButton from './ShopperGoBackButton';
 import images from '../images.json';
+import Item from "./Item";
 
 
 const ShopperViewInventory = (props) => {
-	const [products, setProducts] = useState([]);
-	const params = useParams();
+
+
+		// const { addItem } = useContext(CartContext);
 	
-	// get request stores data, specific farm's inventory, in state
-	useEffect(() => {
-		const fetchProducts = () => {
-			axiosWithAuth()
-				.get(`/inventory/${params.id}`)
-				.then((response) => {
-					setProducts(response.data);
+		const [list, setList] = useState([]);
+	
+		const [cart, setCart] = useState(
+			localStorage.getItem("cart") ? JSON.parse(localStorage.getItem("cart")) : []
+		  );
+		
+		  useEffect(() => {
+			localStorage.setItem("cart", JSON.stringify(cart));
+		  }, [cart]);
+		
+		  const [empty, setEmpty] = useState([]);
+	
+		const addItem = item => {
+			// add the given item to the cart
+			//  e.persist();
+			console.log(item );
+				axiosWithAuth().post('/users/1/cart', item )
+				.then(res=> {
+					console.log("res", res);
+					setCart([...cart, item ]);
+					console.log("cart", cart)
 				})
-				.catch((error) => {
-					console.error(error);
-				});
-		};
-		fetchProducts();
-	}, []);
-
-	const findImage = (itemName) => {
-		console.log(images);
-		for (let i = 0; i < images.length; i++) {
-			if (images[i].name === itemName.toLowerCase()) {
-				return images[i].image;
-			}
-		}
-		return images[0].image;
-	}
-
-	return (
-		<div>
-            <ShopperGoBackButton/>
-			<div className='shopper-view-inventory-container'>
-			
-				<h2>Select Your Fresh Produce</h2>
-				<form className='products'>
-					{products.map((item, index) => {
-						return (
-							<div className='product-row' key={index}>
-								<img src={findImage(item.item)} alt='produce'/>
-								<div>
-									<p className='item-name'>{item.item}</p>
-									<p>Available: {item.quantity} units</p>
-									<div className='select-quantity-container'>
-										<p>Quantity:</p>
-										<input type='number'></input>
-									</div>
-								</div>
-							</div>
-						);
-					})}
-				</form>
-				<Link to='#'><button>Add to Cart</button></Link>
+				.catch(err=> console.log("error!", item))
+		  };
+	
+	 const getInventory = e => {
+		 e.preventDefault();
+			axiosWithAuth().get('/inventory')
+			.then(res=> {
+				console.log(res);
+				setList(res.data);
+				
+			})
+			.catch(err=> console.log("error!"))
+	 };
+	
+		
+		return(
+	
+			<div>
+				<h1> Inventory </h1>
+				<button onClick={getInventory}>Get Inventory</button>
+				<div className="inventory">
+				{console.log("List", list)}
+				{list.map(item => {
+					return (
+						<Item 
+						addItem={addItem}
+						key={item.SKU}
+						name={item.name}
+						price={item.price}
+						pic={item.produceImgURL}
+						farmerID={item.farmer_id}
+						/>
+					)
+				})}
+				</div>
 			</div>
-		</div>
-	);
-};
+		)
+	
+	}
+	
+	
 
 export default ShopperViewInventory;

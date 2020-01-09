@@ -4,21 +4,35 @@ import {axiosWithAuth} from '../utils/axiosWithAuth';
 import FarmerGoBackButton from './FarmerGoBackButton';
 
 // validating form
-const validate = ({ farm_name, farm_address }) => {
+const validate = ({ PLU, name, description, produceImgURL}) => {
 	const errors = {};
 
-	// validating Farm Name
-	if (!farm_name) {
-		errors.farm_name = 'Please enter the name of your farm';
-	} else if (farm_name.length < 4) {
-		errors.farm_name = 'Your name must have two characters or more';
+	// validating Address
+	if (!PLU) {
+		errors.PLU = 'Please enter quantity of product';
+	} else if (PLU.length < 1) {
+		errors.PLU = 'You must add at least 1 of the product';
 	}
 
-	// validating Address
-	if (!farm_address) {
-		errors.farm_address = 'Please enter farm address';
-	} else if (farm_address.length < 5) {
-		errors.farm_address = 'Your address must have 5 characters or more';
+	// validating Farm Name
+	if (!name) {
+		errors.name = 'Please enter the name of your product';
+	} else if (name.length < 4) {
+		errors.name = 'Your name must have two characters or more';
+	}
+
+	
+
+	if (!description) {
+		errors.description = "pls enter description pls";
+	} else if (description.length<1) {
+		errors.description = "pls add description!!";
+	}
+	
+	if (!produceImgURL) {
+		errors.produceImgURL = "pls enter description pls";
+	} else if (produceImgURL.length<1) {
+		errors.produceImgURL = "pls add description!!";
 	}
 
 	return errors;
@@ -29,20 +43,22 @@ const FarmerProfile = (props) => {
 		<div>
 			<FarmerGoBackButton/>
 			<section className='farmer-and-shopper-sign-in-page-section'>
-				<h2>Create A Farm Profile</h2>
+				<h2>Add Inventory</h2>
 
 				<Formik
 					initialValues={{
-						farm_name    : '',
-						farm_address : '',
+						PLU : '',
+						name: '',
+						description: "",
+						produceImgURL: "https://images.unsplash.com/photo-1551754655-cd27e38d2076?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9",
 					}}
 					onSubmit={(values) => {
 						console.log('Submitted Form', values);
 						axiosWithAuth()
-							.put('/farms', values)
+							.post('/produce/', values)
 							.then((response) => {
 								console.log(response);
-								props.history.push('/farmer/dashboard');
+								props.history.push('/farmerprofile');
 							})
 							.catch((error) => {
 								console.log(error);
@@ -52,16 +68,29 @@ const FarmerProfile = (props) => {
 					{() => {
 						return (
 							<Form className='form' autoComplete='off'>
+								
 								<div className='input-container'>
-									<label htmlFor='farm_name'>Farm Name</label>
-									<Field name='farm_name' type='text' placeholder='Enter the name of your farm' />
-									<ErrorMessage name='farm_name' component='div' className='error' />
+									<label htmlFor='PLU'>PLU</label>
+									<Field name='PLU' type='number' placeholder='PLU' />
+									<ErrorMessage name='PLU' component='div' className='error' />
 								</div>
 
 								<div className='input-container'>
-									<label htmlFor='farm_address'>Farm Address</label>
-									<Field name='farm_address' type='text' placeholder='Enter the farm address' />
-									<ErrorMessage name='farm_address' component='div' className='error' />
+									<label htmlFor='name'>Product</label>
+									<Field name='name' type='text' placeholder='Enter the name of your product' />
+									<ErrorMessage name='name' component='div' className='error' />
+								</div>
+
+								<div className='input-container'>
+									<label htmlFor='description'>description</label>
+									<Field name='description' type='text' placeholder='description' />
+									<ErrorMessage name='description' component='div' className='error' />
+								</div>
+
+								<div className='input-container'>
+									<label htmlFor='produceImgURL'>Picture</label>
+									<Field name='produceImgURL' type='text' placeholder='produceImgURL' />
+									<ErrorMessage name='produceImgURL' component='div' className='error' />
 								</div>
 
 								<button className='farmer-sign-in-button button-spacing' type='submit'>

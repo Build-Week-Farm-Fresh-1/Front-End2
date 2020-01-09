@@ -6,51 +6,69 @@ import { axiosWithAuth } from "../utils/axiosWithAuth";
 import { useHistory } from "react-router-dom";
 
 const SignInForm = ({ values, errors, touched, status }) => {
+  console.log("values are", values);
+  //Checking for changes on state
   const [users, setUsers] = useState([]);
 
-  let history = useHistory();
-
   useEffect(() => {
-    console.log("status has changed", status);
-    status && setUsers(user => [...users, status]);
-  }, []);
+    console.log("status has changed!", status);
+    status && setUsers(users => [...users, status]);
+  }, [status]);
+
   return (
     <div className="newAccount-form">
       <Form>
-        <h1>Customer Sign In</h1>
-        <label htmlFor="email">Email Address</label>
-        <Field id="email" type="email" name="email" />
-        <label htmlFor="password">Password</label>
-        <Field id="password" type="password" name="password" />
+        <h1>Sign in to account</h1>
+        <label htmlFor="username">
+          Name
+          <Field id="username" type="text" name="username" />
+          {touched.username && errors.username && (
+            <p className="input-feedback">{errors.username}</p>
+          )}
+        </label>
+        <label htmlFor="password">
+          Password
+          <Field id="password" type="password" name="password" />
+          {touched.password && errors.password && (
+            <p className="input-feedback">{errors.password}</p>
+          )}
+        </label>
+        
 
         <button type="submit">Sign In</button>
         <div className="bottom">
           <p>Don't have an account? </p>
-          <a className="createOne" href="/create"> Create One</a>
+          <a href="/create"> Create One</a>
         </div>
       </Form>
     </div>
   );
 };
 const FormikSignInForm = withFormik({
-  mapPropsToValues({ email, password }) {
+  mapPropsToValues({ username, password }) {
     return {
-      email: email || "",
-      password: password || ""
+      username: username || "",
+      password: password || "",
+
     };
   },
   validationSchema: Yup.object().shape({
-    email: Yup.string().required(),
-    password: Yup.string().required("Password is required")
+    username: Yup.string().required(),
+    password: Yup.string().required("Password is required"),
+
   }),
-  handleSubmit(values, { setStatus }) {
+  handleSubmit(values, { setStatus, resetForm }) {
     console.log("submitting", values);
-    axiosWithAuth().post("/users/login", values).then(response => {
-      localStorage.setitem("token", response.data.payload);
-      useHistory().push("/shopperhome");
-      console.log("success", response);
-      setStatus(response.data);
-    });
+      axiosWithAuth().post("/users/login", values)
+      .then(response => {
+        console.log("success", response);
+        setStatus(response.data);
+        localStorage.setItem("token", response.data.token);
+        useHistory().push("/shopperhome");
+        
+        resetForm();
+      })
+      .catch(error => console.log(error.response));
   }
 })(SignInForm);
 export default FormikSignInForm;

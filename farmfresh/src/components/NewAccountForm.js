@@ -6,65 +6,92 @@ import { axiosWithAuth } from "../utils/axiosWithAuth";
 import { useHistory } from "react-router-dom";
 
 const NewAccountForm = ({ values, errors, touched, status }) => {
+  console.log("values are", values);
+  //Checking for changes on state
   const [users, setUsers] = useState([]);
-  let history = useHistory();
+  
   useEffect(() => {
-    console.log("status has changed", status);
-    status && setUsers(user => [...users, status]);
-  }, []);
+    console.log("status has changed!", status);
+    status && setUsers(users => [...users, status]);
+  }, [status]);
+
   return (
     <div className="newAccount-form">
       <Form>
-        <h1>Create new account</h1>
-        <label htmlFor="firstName">First Name:</label>
-        <Field id="firstName" type="text" name="firstName" />
-        <label htmlFor="lastName">Last Name</label>
-        <Field id="lastName" type="text" name="lastName" />
-        <label htmlFor="email">Email Address</label>
-        <Field id="email" type="text" name="email" />
-        <label htmlFor="password">Password</label>
-        <Field id="password" type="password" name="password" />
-        <label className="checkbox-container">
-          I have read the Terms and Conditions
-          <Field
-            id="termsConditions"
-            type="checkbox"
-            name="termsConditions"
-            checked={values.termsConditions}
-          />
-          <span className="checkmark" />
+        <h1>Create New Consumer Account</h1>
+        <label htmlFor="username">
+          Name:
+          <Field id="username" type="text" name="username" />
+          {touched.username && errors.username && (
+            <p className="input-feedback">{errors.username}</p>
+          )}
         </label>
-        <button type="submit">Create and Account</button>
+        <label htmlFor="password">
+          Password
+          <Field id="password" type="password" name="password" />
+          {touched.password && errors.password && (
+            <p className="input-feedback">{errors.password}</p>
+          )}
+        </label>
+        <label htmlFor="city">
+          City
+          <Field id="city" type="text" name="city" />
+          {touched.city && errors.city && (
+            <p className="input-feedback">{errors.city}</p>
+          )}
+        </label>
+        <label htmlFor="state">
+          State
+          <Field id="state" type="text" name="state" />
+          {touched.state && errors.state && (
+            <p className="input-feedback">{errors.state}</p>
+          )}
+        </label>
+        <label htmlFor="zipCode">
+          Zip Code
+          <Field id="zipCode" type="number" name="zipCode" />
+          {touched.zipCode && errors.zipCode && (
+            <p className="input-feedback">{errors.zipCode}</p>
+          )}
+        </label>
+
+        <button type="submit">Sign In</button>
         <div className="bottom">
           <p>Have an account? </p>
-          <a href="login"> Sign In</a>
+          <a href="/login"> Sign In</a>
         </div>
       </Form>
     </div>
   );
 };
-const FormikNewAccForm = withFormik({
-  mapPropsToValues({ firstName, lastName, email, password, termsConditions }) {
+const FormikNewAccountForm = withFormik({
+  mapPropsToValues({ username, password, city, state, zipCode }) {
     return {
-      firstName: firstName || "",
-      lastName: lastName || "",
-      emial: email || "",
+      username: username || "",
       password: password || "",
-      termsConditions: false
+      city: city || "",
+      state: state || "",
+      zipCode: zipCode || "",
     };
   },
   validationSchema: Yup.object().shape({
-    firstName: Yup.string().required(),
-    lastName: Yup.string().required("Name is required")
+    username: Yup.string().required(),
+    password: Yup.string().required("Password is required"),
+    city: Yup.string().required("Password is required"),
+    state: Yup.string().required("Password is required"),
+    zipCode: Yup.string().required("Password is required")
   }),
-  handleSubmit(values, { setStatus }) {
+  handleSubmit(values, { setStatus, resetForm }) {
     console.log("submitting", values);
-    axiosWithAuth().post("/users/register", values).then(response => {
-      localStorage.setitem("token", response.data.payload);
-      useHistory().push("/shopperhome");
-      console.log("success", response);
-      setStatus(response.data);
-    });
+      axiosWithAuth().post("/users/register", values)
+      .then(response => {
+        console.log("success", response.data);
+        setStatus(response.data);
+        localStorage.setItem("token", response.data.token);
+        useHistory().push("/farmerhome")
+        resetForm();
+      })
+      .catch(error => console.log(error.response));
   }
 })(NewAccountForm);
-export default FormikNewAccForm;
+export default FormikNewAccountForm;

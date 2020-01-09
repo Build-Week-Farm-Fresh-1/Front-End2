@@ -6,6 +6,7 @@ import Account from "../components/Navbar Components/Account";
 import Search from "../components/Navbar Components/Search";
 import SignIn from "../components/Navbar Components/SignIn";
 import SellerBtn from "../components/Navbar Components/SellerBtn";
+import ShoppingCartImg from "../components/Navbar Components/ShoppingCartImg";
 
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 
@@ -17,6 +18,7 @@ const Navbar = () => {
      <Link to="farmerprofile"><Farms /></Link> 
      <Link to="/shopperhome"> <Account /></Link>
       <Search />
+      <Link to ="cart"><ShoppingCartImg /></Link>
       <Link to="/login"><SignIn/></Link>
       <Link to="/farmerlogin"><SellerBtn /></Link>
     </div>

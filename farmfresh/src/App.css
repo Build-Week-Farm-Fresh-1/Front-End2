@@ -373,3 +373,18 @@ a:hover {
   background-color: #F1F3F6;
   margin-right: 4%;
 }
+
+/* INVENTORY */
+
+.inventory{
+  display:flex;
+  flex-wrap:wrap;
+  
+  justify-content: space-between;
+}
+
+.item{
+  border: 1px solid black;
+  width: 28%;
+  height: 35%;
+}
