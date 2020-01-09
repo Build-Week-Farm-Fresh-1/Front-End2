@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import SignIn from "./SignIn";
+import ShoppingCartImg from "./ShoppingCartImg";
 
 import Shop from "./Shop";
 import Farms from "./Farms";
@@ -15,7 +16,7 @@ const Navigation = () => {
       <Shop />
 
       <Farms />
-
+      <ShoppingCartImg />
       <Account />
 
       <Link to="/login">
