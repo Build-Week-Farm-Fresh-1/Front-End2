@@ -5,14 +5,17 @@ import * as Yup from "yup";
 import { axiosWithAuth } from "../utils/axiosWithAuth";
 import { useHistory } from "react-router-dom";
 
-const FarmerLoginForm = ({ values, errors, touched, status }) => {
+const FarmerLoginForm = ( { values, errors, touched, status }) => {
   console.log("values are", values);
   //Checking for changes on state
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
-    console.log("status has changed!", status);
+     console.log("status has changed!", status);
+    console.log("");
+    
     status && setUsers(users => [...users, status]);
+    
   }, [status]);
 
   return (
@@ -59,12 +62,16 @@ const FormikFarmerLoginForm = withFormik({
   }),
   handleSubmit(values, { setStatus, resetForm }) {
     console.log("submitting", values);
+    
       axiosWithAuth().post("/farmers/login", values)
       .then(response => {
         console.log("success", response);
         setStatus(response.data);
+        
         localStorage.setItem("token", response.data.token);
-        useHistory().push("/farmerhome");
+        console.log("is this response.data.id?:", response.data.user.id)
+        localStorage.setItem("id", response.data.user.id)
+        
         
         resetForm();
       })

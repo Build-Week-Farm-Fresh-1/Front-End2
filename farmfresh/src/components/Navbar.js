@@ -16,8 +16,8 @@ const Navbar = () => {
       <Logo />
       <Link to="shopperinventory"><Shop /></Link>
      <Link to="farmerprofile"><Farms /></Link> 
-     <Link to="/shopperhome"> <Account /></Link>
-      <Search />
+     <Link to="/farmerhome"> <Account /></Link>
+      <Link to="/accountprofile"><Search /></Link>
       <Link to ="cart"><ShoppingCartImg /></Link>
       <Link to="/login"><SignIn/></Link>
       <Link to="/farmerlogin"><SellerBtn /></Link>

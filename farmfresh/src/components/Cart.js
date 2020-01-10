@@ -1,10 +1,22 @@
 import React, {useContext} from "react";
-import Item from "./CartItem";
+import CartItem from "./CartItem";
 //import {NavLink} from "react-router-dom";
 import CartContext from "../components/contexts/CartContext";
+import {axiosWithAuth} from "../utils/axiosWithAuth";
 
 const Cart = () => {
-    const {cart, removeItem, clearCart} = useContext(CartContext);
+    const {cart, setCart, removeItem, clearCart} = useContext(CartContext);
+
+    const getCart = () => {
+        const id = localStorage.getItem('id');
+        console.log("id:" , id);
+        axiosWithAuth().get(`/users/${id}/cart`)
+        .then(res => {
+            console.log(res.data); 
+            setCart(res.data);
+        })
+        .catch(err => console.log(err));
+    }
 
     return (
         <div className="cart">
@@ -12,22 +24,24 @@ const Cart = () => {
 
             <div className="cart-title">
                 Shopping Cart
+                <button onClick={getCart}>Cart Summary</button>
             </div>
 
             <div className="cart-checkout">
 
             <div className="cart-list">
-            {/* {cart.map(item=> (
-                <Item key={item.id} {...item} removeItem={removeItem} />
-            ))} */}
-            <Item/>
+                {console.log("cart", cart)}
+            {cart.map(item=> (
+                <CartItem key={item.SKU} {...item} setCart={setCart} removeItem={removeItem} cart={cart} />
+            ))}
+            <CartItem/>
             </div>
 
             <div className="totalCart">
                 <div className="orderSummary">
                 <p>Order Summary</p>
                 </div>
-                <p>Total Items:  8</p>
+                <p>Total Items:  {cart.length}</p>
                 <p>Total (tax included): $34.99 </p>
                 <button> Go To Checkout </button>
             </div>

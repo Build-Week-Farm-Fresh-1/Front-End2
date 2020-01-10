@@ -5,6 +5,7 @@ import {axiosWithAuth} from '../utils/axiosWithAuth';
 import ShopperGoBackButton from './ShopperGoBackButton';
 import images from '../images.json';
 import Item from "./Item";
+import CartForm from "./CartForm";
 
 
 const ShopperViewInventory = (props) => {
@@ -27,11 +28,11 @@ const ShopperViewInventory = (props) => {
 		const addItem = item => {
 			// add the given item to the cart
 			//  e.persist();
-			console.log(item );
-				axiosWithAuth().post('/users/1/cart', item )
+			console.log(item);
+				axiosWithAuth().post('/users/92/cart', item )
 				.then(res=> {
 					console.log("res", res);
-					setCart([...cart, item ]);
+					setCart([...cart, res ]);
 					console.log("cart", cart)
 				})
 				.catch(err=> console.log("error!", item))
@@ -52,7 +53,9 @@ const ShopperViewInventory = (props) => {
 		return(
 	
 			<div>
-				<h1> Inventory </h1>
+				<h1> Choose from these available products </h1>
+
+				<CartForm/>
 				<button onClick={getInventory}>Get Inventory</button>
 				<div className="inventory">
 				{console.log("List", list)}
@@ -65,6 +68,8 @@ const ShopperViewInventory = (props) => {
 						price={item.price}
 						pic={item.produceImgURL}
 						farmerID={item.farmer_id}
+						SKU={item.SKU}
+						PLU={item.PLU}
 						/>
 					)
 				})}

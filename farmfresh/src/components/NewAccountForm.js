@@ -88,6 +88,7 @@ const FormikNewAccountForm = withFormik({
         console.log("success", response.data);
         setStatus(response.data);
         localStorage.setItem("token", response.data.token);
+        localStorage.setItem("id", response.data.newUser.id)
         useHistory().push("/farmerhome")
         resetForm();
       })

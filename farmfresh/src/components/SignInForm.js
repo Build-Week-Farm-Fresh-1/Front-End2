@@ -64,6 +64,7 @@ const FormikSignInForm = withFormik({
         console.log("success", response);
         setStatus(response.data);
         localStorage.setItem("token", response.data.token);
+        localStorage.setItem("id", response.data.user.id)
         useHistory().push("/shopperhome");
         
         resetForm();

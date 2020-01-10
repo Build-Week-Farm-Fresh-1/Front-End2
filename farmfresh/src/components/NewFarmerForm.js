@@ -88,7 +88,8 @@ const FormikNewFarmerForm = withFormik({
         console.log("success", response.data);
         setStatus(response.data);
         localStorage.setItem("token", response.data.token);
-        useHistory().push("/farmerhome")
+        localStorage.setItem("id", response.data.newFarmer.id)
+        useHistory().push('/farmerprofile');
         resetForm();
       })
       .catch(error => console.log(error.response));

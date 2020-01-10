@@ -1,4 +1,4 @@
 import React from "react";
-const Account = () => <div>Account</div>;
+const Account = () => <div>Farmer Inventory</div>;
 
 export default Account;
