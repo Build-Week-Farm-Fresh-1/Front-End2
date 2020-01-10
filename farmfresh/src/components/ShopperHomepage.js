@@ -44,6 +44,7 @@ const ShopperHomepage = (props) => {
 						SKU={item.SKU}
 						PLU={item.PLU}
 						quantity={item.quantity}
+						increment={item.increment}
 						/>
 					)
 				})}

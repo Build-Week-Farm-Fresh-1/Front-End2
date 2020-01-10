@@ -21,6 +21,7 @@ const FarmerInventory = (props) => {
             <p>SKU: {props.SKU}</p>
             <p>PLU: {props.PLU}</p>
             <p>Quantity: {props.quantity}</p>
+            <p>Increment: {props.increment}</p>
             <button onClick={deleteItem}>Delete from inventory</button>
             <EditForm SKU={props.SKU}/>
         </div>
