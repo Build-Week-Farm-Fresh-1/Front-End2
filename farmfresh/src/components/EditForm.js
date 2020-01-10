@@ -12,7 +12,7 @@ const EditForm = props => {
     e.preventDefault();
     const id = localStorage.getItem('id');
     axiosWithAuth()
-      .post(`/farmers/${id}/inventory/${props.SKU}`, { PLU, quantity, increment, price})
+      .put(`/farmers/${id}/inventory/${props.SKU}`, { PLU, quantity, increment, price})
       .then(res => console.log(res))
       .catch(err => console.log(err));
 
@@ -24,6 +24,7 @@ const EditForm = props => {
 
   return (
     <div>
+        
       <form onSubmit={handleSubmit}>
         <input
           type="number"

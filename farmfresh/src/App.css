@@ -393,8 +393,7 @@ align-items: center;
 .inventory{
   display:flex;
   flex-wrap:wrap;
-  
-  justify-content: space-between;
+  justify-content: space-evenly;
 }
 
 .item{

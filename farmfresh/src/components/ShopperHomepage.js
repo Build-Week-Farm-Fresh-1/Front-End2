@@ -28,8 +28,6 @@ const ShopperHomepage = (props) => {
 		<div>
 			<h1> Your Farmer Inventory</h1>
 			{console.log(inventory.SKU)}
-			<EditForm key={inventory.SKU}
-						SKU={inventory.SKU}/>
 			<button onClick={getInventory}>Get Inventory</button>
 			<div className="inventory">
 				{console.log("Inventory", inventory)}

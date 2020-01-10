@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import {axiosWithAuth} from "../utils/axiosWithAuth";
+import EditForm from "./EditForm";
 
 const FarmerInventory = (props) => {
 
@@ -21,6 +22,7 @@ const FarmerInventory = (props) => {
             <p>PLU: {props.PLU}</p>
             <p>Quantity: {props.quantity}</p>
             <button onClick={deleteItem}>Delete from inventory</button>
+            <EditForm SKU={props.SKU}/>
         </div>
     )
 
