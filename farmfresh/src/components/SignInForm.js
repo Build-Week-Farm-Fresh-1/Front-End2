@@ -4,6 +4,7 @@ import axios from "axios";
 import * as Yup from "yup";
 import { axiosWithAuth } from "../utils/axiosWithAuth";
 import { useHistory } from "react-router-dom";
+import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 
 const SignInForm = ({ values, errors, touched, status }) => {
   console.log("values are", values);
@@ -38,7 +39,7 @@ const SignInForm = ({ values, errors, touched, status }) => {
         <button type="submit">Sign In</button>
         <div className="bottom">
           <p>Don't have an account? </p>
-          <a href="https://farmfresh1.netlify.com/create"> Create One</a>
+          <Link to="/create"> Create One</Link>
         </div>
       </Form>
     </div>
