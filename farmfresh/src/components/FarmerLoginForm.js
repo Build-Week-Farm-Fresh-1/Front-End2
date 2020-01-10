@@ -41,7 +41,7 @@ const FarmerLoginForm = ( { values, errors, touched, status }) => {
         <button type="submit">Sign In</button>
         <div className="bottom">
           <p>Don't have an account? </p>
-          <a href="/createfarmer"> Create One</a>
+          <a href="https://farmfresh1.netlify.com/createfarmer"> Create One</a>
         </div>
       </Form>
     </div>

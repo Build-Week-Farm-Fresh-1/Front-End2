@@ -38,7 +38,7 @@ const SignInForm = ({ values, errors, touched, status }) => {
         <button type="submit">Sign In</button>
         <div className="bottom">
           <p>Don't have an account? </p>
-          <a href="/create"> Create One</a>
+          <a href="https://farmfresh1.netlify.com/create"> Create One</a>
         </div>
       </Form>
     </div>
