@@ -5,10 +5,10 @@ import NewAccountForm from "./NewAccountForm";
 
 const NewAccountPage = () => {
   return (
-    <>
+    <div className="sign-pages">
       <Picture />
       <NewAccountForm />
-    </>
+    </div>
   );
 };
 export default NewAccountPage;

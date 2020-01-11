@@ -4,7 +4,14 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import * as Yup from "yup";
 
-const NewAccountForm = ({ values, errors, touched, status, isSubmitting }) => {
+const NewAccountForm = ({
+  values,
+  errors,
+  touched,
+  status,
+  isSubmitting,
+  Redirect
+}) => {
   console.log("values are", values);
   //Checking for changes on state
   const [users, setUsers] = useState([]);
@@ -82,7 +89,7 @@ const NewAccountForm = ({ values, errors, touched, status, isSubmitting }) => {
         </label>
         <button type="submit" disabled={isSubmitting}>
           {isSubmitting ? "SUBMITTING" : "Create an Account"}
-          {/* {toHome ? <Redirect to="/home" /> : null} */}
+          {/* {toHome ? <Redirect to="https://farmfresh1.netlify.com/" /> : null} */}
         </button>
         <div className="bottom">
           <p>Have an account? </p>
